@@ -112,31 +112,10 @@ class UnalignedDataset(BaseDataset):
         if(opt.state == "Train"):
             self.dir_B = os.path.join(opt.dataroot, opt.phase + 'B')  # create a path '/path/to/data/trainB'
 
-        # if opt.phase == "test" and not os.path.exists(self.dir_A) \
-        #    and os.path.exists(os.path.join(opt.dataroot, "valA")):
-        #     self.dir_A = os.path.join(opt.dataroot, "valA")
-        #     self.dir_B = os.path.join(opt.dataroot, "valB")
-        
-        if opt.state == "Test":
-            self.dir_B = os.path.join("/share/nas169/jethrowang/NADA-GAN/VoiceBank-DEMAND/trainset_for_UNA-GAN/trainB/")
-            if opt.inference_set == 1:
-                self.dir_A = os.path.join("/share/nas169/jethrowang/NADA-GAN/VoiceBank-DEMAND/inferenceset_for_UNA-GAN/1/")
-            elif opt.inference_set == 2:
-                self.dir_A = os.path.join("/share/nas169/jethrowang/NADA-GAN/VoiceBank-DEMAND/inferenceset_for_UNA-GAN/2/")
-            elif opt.inference_set == 3:
-                self.dir_A = os.path.join("/share/nas169/jethrowang/NADA-GAN/VoiceBank-DEMAND/inferenceset_for_UNA-GAN/3/")
-            elif opt.inference_set == 4:
-                self.dir_A = os.path.join("/share/nas169/jethrowang/NADA-GAN/VoiceBank-DEMAND/inferenceset_for_UNA-GAN/4/")
-            elif opt.inference_set == 5:
-                self.dir_A = os.path.join("/share/nas169/jethrowang/NADA-GAN/VoiceBank-DEMAND/trg_trainset_for_UNA-GAN/trainA/")
-            elif opt.inference_set == 6:
-                self.dir_A = os.path.join("/share/nas169/jethrowang/NADA-GAN/VoiceBank-DEMAND/inferenceset_for_UNA-GAN/mos/clean/")
-                self.dir_B = os.path.join("/share/nas169/jethrowang/NADA-GAN/VoiceBank-DEMAND/inferenceset_for_UNA-GAN/mos/noisy/")
-            elif opt.inference_set == 7:
-                self.dir_A = os.path.join("/share/nas169/jethrowang/NADA-GAN/VoiceBank-DEMAND/inferenceset_for_UNA-GAN/delta/src/")
-                self.dir_B = os.path.join("/share/nas169/jethrowang/NADA-GAN/VoiceBank-DEMAND/inferenceset_for_UNA-GAN/delta/trg_nsy/")
-            else:
-                self.dir_A = os.path.join("/share/corpus/VoiceBank/clean_trainset_wav_16k/")
+        if opt.phase == "test" and not os.path.exists(self.dir_A) \
+           and os.path.exists(os.path.join(opt.dataroot, "valA")):
+            self.dir_A = os.path.join(opt.dataroot, "valA")
+            self.dir_B = os.path.join(opt.dataroot, "valB")
 
         self.A_paths = sorted(make_dataset(self.dir_A, opt.max_dataset_size))   # load images from '/path/to/data/trainA'
         # if(opt.state == "Train"):
